@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ka" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ჩემი განხორციელებული პროექტები - ანა ნარიმანიძე">
+    <title>პროექტები | ანა ნარიმანიძე</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <script>
+        // თემის ინიციალიზაცია ჩატვირთვისთანავე
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <style>
+        #menu-toggle {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+            width: 0;
+            height: 0;
+            margin: 0;
+        }
+        @media screen and (max-width: 767px) {
+            .desktop-nav { display: none !important; }
+            .burger-btn { display: flex !important; }
+            #mobile-menu { display: none; }
+            #menu-toggle:checked ~ #mobile-menu { display: block !important; }
+        }
+        @media screen and (min-width: 768px) {
+            .desktop-nav { display: block !important; }
+            .burger-btn { display: none !important; }
+            #mobile-menu { display: none !important; }
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between transition-colors duration-200">
+
+    <!-- საიტის ზედა ნაწილი (Header) -->
+    <header id="header" class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-4">
+            <!-- დამალული გადამრთველი ბურგერისთვის (CSS Hack) -->
+            <input type="checkbox" id="menu-toggle" aria-label="მენიუს გადამრთველი">
+
+            <div class="flex items-center justify-between gap-4">
+                <div class="min-w-0">
+                    <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 tracking-tight">ჩემი პროექტები</h1>
+                    <p class="text-xs md:text-sm text-slate-500 dark:text-slate-400 mt-0.5">აქ შეგიძლიათ გაეცნოთ ჩემს მიერ შექმნილ ნამუშევრებსა და პროექტებს.</p>
+                </div>
+
+                <!-- მარჯვენა მხარე: თემის გადამრთველი + ბურგერი / დესკტოპ ნავიგაცია -->
+                <div class="flex items-center gap-2">
+                    <!-- თემის გადამრთველი ღილაკი -->
+                    <button id="theme-toggle" type="button" aria-label="თემის შეცვლა"
+                        class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none transition-colors cursor-pointer border border-slate-200 dark:border-slate-700">
+                        <svg id="theme-toggle-light-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                        </svg>
+                        <svg id="theme-toggle-dark-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                    </button>
+
+                    <!-- ბურგერ მენიუს ღილაკი (ჩანს 768px-მდე) -->
+                    <label id="burger-label" for="menu-toggle" class="burger-btn shrink-0 p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition focus:outline-none cursor-pointer select-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </label>
+
+                    <!-- ნავიგაცია დესკტოპისთვის (ჩანს 768px-დან) -->
+                    <nav aria-label="მთავარი ნავიგაცია" class="desktop-nav shrink-0">
+                        <ul class="flex items-center gap-2 lg:gap-3 text-sm font-medium text-slate-600 dark:text-slate-300 whitespace-nowrap">
+                            <li><a href="../index.html" class="px-2.5 sm:px-3 py-1.5 rounded-lg hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-slate-800 transition">მთავარი</a></li>
+                            <li><a href="../index.html#about" class="px-2.5 sm:px-3 py-1.5 rounded-lg hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-slate-800 transition">ჩემ შესახებ</a></li>
+                            <li><a href="../index.html#skills" class="px-2.5 sm:px-3 py-1.5 rounded-lg hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-slate-800 transition">უნარები</a></li>
+                            <li><a href="#projects-list" class="px-2.5 sm:px-3 py-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 font-semibold">პროექტები</a></li>
+                            <li><a href="../index.html#contact" class="px-2.5 sm:px-3.5 py-1.5 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition shadow-sm">კონტაქტი</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- მობილური მენიუს ჩამოსაშლელი ბლოკი -->
+            <nav id="mobile-menu" aria-label="მობილური ნავიგაცია" class="pt-4 pb-2 border-t border-slate-100 dark:border-slate-800 mt-3">
+                <ul class="flex flex-col gap-1.5 text-sm font-medium text-slate-600 dark:text-slate-300">
+                    <li><a href="../index.html" class="block px-3 py-2 rounded-lg hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-slate-800 transition">მთავარი</a></li>
+                    <li><a href="../index.html#about" class="block px-3 py-2 rounded-lg hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-slate-800 transition">ჩემ შესახებ</a></li>
+                    <li><a href="../index.html#skills" class="block px-3 py-2 rounded-lg hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-slate-800 transition">უნარები</a></li>
+                    <li><a href="#projects-list" class="block px-3 py-2 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 font-semibold">პროექტები</a></li>
+                    <li><a href="../index.html#contact" class="block text-center px-3.5 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition shadow-sm mt-1">კონტაქტი</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ძირითადი შიგთავსი (Main) -->
+    <main class="max-w-5xl mx-auto px-6 py-10 flex-grow w-full">
+        <section id="projects-list" class="space-y-8">
+            <div class="border-b border-slate-200 dark:border-slate-800 pb-4">
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white border-l-4 border-indigo-600 pl-3">
+                    განხორციელებული პროექტები</h2>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1 pl-4">გამორჩეული ვებ პროექტების პორტფოლიო</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- პროექტი 1 -->
+                <article id="project-1"
+                    class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700/60 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <span
+                            class="inline-block px-2.5 py-1 text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 rounded-md">ბლოგი</span>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">პირადი ბლოგი</h3>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                            <strong>აღწერა:</strong> საინტერესო სტატიებისა და პოსტების პლატფორმა მარტივი და
+                            მოსახერხებელი ინტერფეისით.
+                        </p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">
+                            <strong>ტექნოლოგიები:</strong> HTML5, სემანტიკური თეგები
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-slate-100 dark:border-slate-700/60 mt-4">
+                        <a href="#"
+                            class="inline-flex items-center text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition">
+                            პროექტის დათვალიერება &rarr;
+                        </a>
+                    </div>
+                </article>
+
+                <!-- პროექტი 2 -->
+                <article id="project-2"
+                    class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700/60 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <span
+                            class="inline-block px-2.5 py-1 text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 rounded-md">მედია</span>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">ფოტო გალერეა</h3>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                            <strong>აღწერა:</strong> სხვადასხვა თემატიკის სურათების კოლექცია და გალერეა.
+                        </p>
+                        <figure class="overflow-hidden rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700/60 my-2">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUF_8J1iEiBnp_liq8W5S8cofnKCs894xjgDX6m3wIv4opL5TKAmWkI8o&s=10"
+                                alt="გალერეის საჩვენებელი ფოტო"
+                                class="w-full h-36 object-cover hover:scale-105 transition duration-300">
+                            <figcaption class="p-2 text-xs text-center text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900">გალერეის ნიმუში
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100 dark:border-slate-700/60 mt-2">
+                        <a href="#"
+                            class="inline-flex items-center text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition">
+                            პროექტის დათვალიერება &rarr;
+                        </a>
+                    </div>
+                </article>
+
+                <!-- პროექტი 3 -->
+                <article id="project-3"
+                    class="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700/60 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <span
+                            class="inline-block px-2.5 py-1 text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 rounded-md">აპლიკაცია</span>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">დავალებების მმართველი</h3>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                            <strong>აღწერა:</strong> ყოველდღიური ამოცანების ჩასანიშნი და სამართავი აპლიკაცია (To-Do
+                            App).
+                        </p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">
+                            <strong>ტექნოლოგიები:</strong> HTML5, JavaScript
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-slate-100 dark:border-slate-700/60 mt-4">
+                        <a href="#"
+                            class="inline-flex items-center text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition">
+                            პროექტის დათვალიერება &rarr;
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- საიტის ქვედა ნაწილი (Footer) -->
+    <footer id="footer" class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 mt-16 text-center text-sm text-slate-500 dark:text-slate-400 transition-colors">
+        <div class="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p>&copy; 2026 ანა ნარიმანიძე. ყველა უფლება დაცულია.</p>
+            <div class="space-x-3">
+                <a href="../index.html" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-medium transition">&larr;
+                    მთავარზე დაბრუნება</a>
+                <span class="text-slate-300 dark:text-slate-700">|</span>
+                <a href="#header" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-medium transition">&uarr; ზემოთ
+                    დაბრუნება</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- გარე JavaScript ფაილი -->
+    <script src="../scripts/script.js"></script>
+</body>
+
+</html>
